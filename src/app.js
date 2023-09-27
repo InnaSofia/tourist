@@ -1,41 +1,66 @@
-/* 
-async function tours(){
-    const response = await fetch('https://www.bit-by-bit.ru/api/student-projects/tours')
-    const data = await response.json()
+import { format, differenceInDays } from "date-fns"
+import { ru } from "date-fns/locale"
 
+let tours
+
+async function loadTours() {
+    const response = await fetch(
+        "https://www.bit-by-bit.ru/api/student-projects/tours"
+    )
+    const data = await response.json()
     return data
 }
 
-
-const containerTours = document.getElementById('containerTours');//конт где все туры
-//показать туры
-function showTours(){
-    containerTours.innerHTML = ''
+function renderTours(tours) {
+    document.getElementById("containerTours").innerHTML = ""
     tours.forEach((tour) => {
-        containerTours.innerHTML += `
-        <div class="mt-12 gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        <div>${tour.country}</div>
-        <div>${tour.city}</div>
-        <div>${tour.hotelName}</div>
-        <div>${tour.rating}</div>
-        <div>${tour.image}</div>
-        <div>${tour.price}</div> 
-        <div>${tour.startTime} - ${tour.endTime}</div>
-        </div>
-        `
-    });
-}
-
-showTours() */
-
-
-
-function showTours() {
-    fetch('https://www.bit-by-bit.ru/api/student-projects/tours')
-    .then((response) =>{
-        return response.json()
-    })
-    .then((data) =>{
-        console.log (data)
+        const duration = differenceInDays(
+            new Date(tour.andTime), 
+            new Date(tour.startTime)
+            )
+        document.getElementById("containerTours").innerHTML += `
+    <div class="my-10">
+       ${tour.country}, 
+       ${tour.hotel}, 
+       ${format(new Date(tour.startTime), `dd, MMMM, yyyy`, 
+       {locale: ru}
+           )} - ${format(new Date(tour.andTime), `dd, MMMM, yyyy`, 
+       {locale: ru }
+       )}, Продплжительность: ${duration}
+    </div>
+    `
     })
 }
+
+function filterCountry(tours, country) {
+    if (country) {
+        const filteredTours = tours.filter((tour) => {
+            return tour.country === country
+        })
+        renderTours(filteredTours)
+    } else {
+        renderTours(tours)
+    }
+}
+
+async function init() {
+    const tours = await loadTours()
+    renderTours(tours)
+
+    document
+        .getElementById("indonesia")
+        .addEventListener("click", () => filterCountry(tours, "Индонезия"))
+    document
+        .getElementById("thailand")
+        .addEventListener("click", () => filterCountry(tours, "Тайланд"))
+    document
+        .getElementById("Maldives")
+        .addEventListener("click", () => filterCountry(tours, "Мальдивы"))
+    document
+        .getElementById("all")
+        .addEventListener("click", () => filterCountry(tours))
+        
+        renderTours(tours)
+}
+
+init()
