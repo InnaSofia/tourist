@@ -22,19 +22,27 @@ function renderTours(tours) {
             new Date(tour.startTime)
             )  
        document.getElementById("containerTours").innerHTML += `
-    <div class="mt-12 gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-       ${tour.country},
-       ${tour.city},
-       ${tour.hotelName},
-       ${tour.rating},
-       ${tour.image},
-       ${tour.price},
-       ${format(new Date(tour.startTime), `dd, MMMM, yyyy`, 
+    <div class= "mt-12 gap-8 grid-cols-1 sm:grid-cols-2 w-1/4 h-full">
+       <div class="bg-white shadow-lg rounded-lg">
+
+       <div>
+       <div class="w-full"><img src="${tour.image}"></div>
+       <div class="">${tour.rating}</div>
+       <div class="">${tour.country}</div>
+       <div class="">${tour.city}</div>
+       <div class="">${tour.hotelName}</div>
+       <div class="">${tour.price}</div>
+       <div class=""${format(new Date(tour.startTime), `dd MMMM yyyy`, 
        {locale: ru}
-           )} - ${format(new Date(tour.endTime), `dd, MMMM, yyyy`, 
+           )} - ${format(new Date(tour.endTime), `dd MMMM yyyy`, 
        {locale: ru }
-       )}, Продплжительность: ${duration}
+       )}</div> Продплжительность: ${duration}
+    </div></div>
+    
     </div>
+
+    
+    
     `
 })
 }
@@ -49,7 +57,7 @@ if(country){
 }else{
     renderTours(tours)
 }
-} */
+} 
 
 /* document.getElementById("Indonesia").addEventListener('click',() => (tours, "Индонезия"))
 document.getElementById("Thailand").addEventListener('click',() => (tours, "Тайланд"))
