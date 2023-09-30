@@ -23,24 +23,32 @@ function renderTours(tours) {
             )  
        document.getElementById("containerTours").innerHTML += `
     <div class= "mt-12 gap-8 grid-cols-1 sm:grid-cols-2 w-1/4 h-full">
-       <div class="bg-white shadow-lg rounded-lg">
+       <div class="bg-white shadow-lg rounded-lg h-96">
 
-       <div>
-       <div class="w-full"><img src="${tour.image}"></div>
-       <div class="">${tour.rating}</div>
-       <div class="">${tour.country}</div>
-       <div class="">${tour.city}</div>
-       <div class="">${tour.hotelName}</div>
-       <div class="">${tour.price}</div>
-       <div class=""${format(new Date(tour.startTime), `dd MMMM yyyy`, 
+       <div class="p-2">
+       <div><div class="bg-indigo-800 text-white w-8 text-center rounded-full absolute m-2">${tour.rating}</div>
+       <img class="rounded h-36 w-full" src="${tour.image}"></div>
+       <div class="text-xs text-slate-500 pt-3">${tour.country} - ${tour.city}</div>
+       <div class="text-lg text-indigo-800 pt-3 font-semibold leading-normal">${tour.hotelName}</div>
+       <div class="pt-3 font-semibold text-lg">${tour.price}</div>
+       <div class="text-xs pt-3 text-slate-500">${format(new Date(tour.startTime), `dd MMMM yyyy`, 
        {locale: ru}
            )} - ${format(new Date(tour.endTime), `dd MMMM yyyy`, 
        {locale: ru }
-       )}</div> Продплжительность: ${duration}
-    </div></div>
+       )} 
+    Продплжительность: ${duration}</div>
+
+    <div class="pt-3">
+    <button class="bg-white border-2 rounded-lg border-indigo-700 text-xs text-indigo-800 pt-3 font-semibold leading-normal">Забронировать</button</div>
     
     </div>
 
+    </div>
+
+    
+    </div>
+
+    
     
     
     `
