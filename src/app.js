@@ -23,7 +23,7 @@ function renderTours(tours) {
             )  
        document.getElementById("containerTours").innerHTML += `
     <div class= "mt-12 gap-8 grid-cols-1 sm:grid-cols-2 w-1/4 h-full">
-       <div class="bg-white shadow-lg rounded-lg h-96">
+       <div class="bg-white shadow-lg rounded-lg">
 
        <div class="p-2">
        <div><div class="bg-indigo-800 text-white w-8 text-center rounded-full absolute m-2">${tour.rating}</div>
@@ -38,8 +38,10 @@ function renderTours(tours) {
        )} 
     Продплжительность: ${duration}</div>
 
-    <div class="pt-3">
-    <button class="bg-white border-2 rounded-lg border-indigo-700 text-xs text-indigo-800 pt-3 font-semibold leading-normal">Забронировать</button</div>
+    <div class="pt-3 flex justify-between">
+    <button class="bg-white border-2 rounded-lg border-indigo-700 text-xs text-indigo-800 pt-1 leading-normal p-1.5 hover:bg-indigo-800 hover:text-white w-28">Забронировать</button>
+    <button class="bg-blue-800 border-2 rounded-lg border-indigo-800 text-xs text-white pt-1 leading-normal p-1.5 hover:bg-white hover:text-indigo-800 w-28">В избранное</button>
+    </div>
     
     </div>
 
