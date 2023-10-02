@@ -25,7 +25,7 @@ function renderTours(tours) {
         )
         document.getElementById("containerTours").innerHTML += `
    
-       <div class="bg-white shadow-lg rounded-lg overflow-hidden p-2 flex flex-col justify-between">
+       <div class="bg-white shadow-lg rounded-lg overflow-hidden p-2 flex flex-col justify-between ease-in duration-300">
 
 
        <div><div class="bg-indigo-800 text-white w-8 text-center rounded-full absolute m-2">${
