@@ -36,10 +36,19 @@ function renderTours(tours) {
 
        <div class="flex flex-col">
 <div>
-       <div class="text-xs text-slate-500 pt-3">${tour.country} - ${
-           tour.city
-       }</div>
+       <span class="text-xs text-slate-500 pt-3">${tour.country}</span>
+${
+    tour.city !== null ? 
+    `  <span class="text-slate-500 pt-6 px-1">&middot;
+    </span>  
+    <span class="text-xs text-slate-500 pt-3">${tour.city}</span>
+    ` : ""
+}
 
+
+     
+
+    
 
        <div class="text-lg text-indigo-800 pt-3 font-semibold leading-normal">${
            tour.hotelName
