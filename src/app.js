@@ -36,6 +36,9 @@ function renderTours(tours) {
 
        <div class="flex flex-col">
 <div>
+
+
+
        <span class="text-xs text-slate-500 pt-3">${tour.country}</span>
 ${
     tour.city !== null ? 
