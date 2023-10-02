@@ -25,9 +25,10 @@ function renderTours(tours) {
         )
         document.getElementById("containerTours").innerHTML += `
    
-       <div class="bg-white shadow-lg rounded-lg overflow-hidden p-2 flex flex-col justify-between transition duration-150 ease-in-out">
+       <div class="bg-white shadow-lg rounded-lg overflow-hidden p-2 flex flex-col justify-between duration-{amount} transition duration-150 ease-in-out transform hover:scale-105">
 
 
+       
        <div><div class="bg-indigo-800 text-white w-8 text-center rounded-full absolute m-2">${
            tour.rating
        }</div>
