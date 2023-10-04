@@ -32,7 +32,7 @@ function renderTours(tours) {
        <div><div class="bg-indigo-800 text-white w-8 text-center rounded-full absolute m-2">${
            tour.rating
        }</div>
-       <img class="rounded h-32 w-full sm:min-h-auto" src="${tour.image}"></div>
+       <img class="rounded h-32 w-full sm:h-32 md:h-40" src="${tour.image}"></div>
 
        <div class="flex flex-col">
 <div>

@@ -252,10 +252,10 @@
         </div>
 
 
-        <div>
-
-            <div >
-                 <h class="text-3xl font-bold text-indigo-800">Выбранный тур</h>
+        <div class="flex justify-center fixed top-0 right-0 bottom-0 left-0 items-center bg-indigo-400/40">
+<div class="flex bg-white p-12 gap-4">
+            <div class="w-1/2">
+                 <h class="text-3xl font-bold text-indigo-800">Выбранный тур</br>ниже</h>
 
                  <div>
                    <p class="text-slate-700">Cтрана тура</p>
@@ -284,17 +284,40 @@
 
             </div>
 
-            <div>
+            <div class="w-1/2">
 
                 <h class="text-3xl font-bold text-red-800">Введите Ваши данные для бронирования тура</h>
 
                 <div>
-                  <p class="text-slate-700">Cтрана тура</p>
-                <input id="tourCountry" class="border-solid border-2 border-rose-400 rounded-md text-sm shadow-sm caret-red-700 active:bg-red-100 focus:outline-none text-red-700 mb-3 w-full"/>
+                  <p class="text-slate-700">Фамилия Имя</p>
+                <input id="Name" class="border-solid border-2 border-rose-400 rounded-md text-sm shadow-sm caret-red-700 active:bg-red-100 focus:outline-none text-red-700 mb-3 w-full"/>
                </div>
 
+               <div>
+                <p class="text-slate-700">Телефон</p>
+              <input id="phone" class="border-solid border-2 border-rose-400 rounded-md text-sm shadow-sm caret-red-700 active:bg-red-100 focus:outline-none text-red-700 mb-3 w-full"/>
+             </div>
+
+             <div>
+                <p class="text-slate-700">Email</p>
+              <input id="email" class="border-solid border-2 border-rose-400 rounded-md text-sm shadow-sm caret-red-700 active:bg-red-100 focus:outline-none text-red-700 mb-3 w-full"/>
+             </div>
+
+
+             <div>
+                <p class="text-slate-700">Комментарий</p>
+                
+              <input id="comment" class="border-solid border-2 border-rose-400 rounded-md text-sm shadow-sm caret-red-700 active:bg-red-100 focus:outline-none text-red-700 mb-3 w-full h-20"/>
+             </div>
+
+             <div class="pt-3 flex justify-between">
+                <button id="OpenModal" class="bg-white border-2 rounded-lg border-indigo-700 text-xs text-indigo-800 pt-1 leading-normal p-1.5 hover:bg-indigo-800 hover:text-white w-28">Отправить</button>
+                <button id="CloseModal" class="bg-blue-800 border-2 rounded-lg border-indigo-800 text-xs text-white pt-1 leading-normal p-1.5 hover:bg-white hover:text-indigo-800 w-28">Закрыть</button>
+                </div>
 
             </div>
+
+        </div>   
 
         </div>
 
