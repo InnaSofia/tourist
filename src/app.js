@@ -91,9 +91,9 @@ ${
     
 }
 
-/* const modalWindow = document.getElementById('modalWindow')//окно
-const BtnReservation = document.getElementById('BtnReservation')//кнопка забронировать
-const BtnCloseWindows = document.getElementById('BtnCloseWindows')// кнопка закрыть
+const modalWindow = document.getElementById('modalWindow')//окно
+const BtnReservation = document.getElementById('BtnReservation')//кнопка забронировать т.е. открыть окно
+
 //открываем
 let currentId
 function OpenWindow(id){
@@ -145,4 +145,4 @@ const parametrs = {
 
 }
 
- */
+ 
