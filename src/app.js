@@ -7,15 +7,16 @@ async function loadTours() {
   const response = await fetch(
     'https://www.bit-by-bit.ru/api/student-projects/tours'
   );
-  const data = await response.json();
-  return data;
+  const data = await response.json()
+  return data
 }
 
 async function init() {
-  const tours = await loadTours();
-  renderTours(tours);
+  const tours = await loadTours()
+  renderTours(tours)
+  
 }
-init();
+init()
 
 function renderTours(tours) {
 
@@ -103,7 +104,7 @@ ${
 
 const modalWindow = document.getElementById('modalWindow'); //окно
 const сloseWindows = document.getElementById('BtnCloseWindows');//кнопка закрыть
-const btnReservation = document.getElementById(`btnReservation-${tour.id}`); //кнопка забронировать т.е. открыть окно
+const btnReservation = document.getElementById(`btnReservation-${tours.id}`); //кнопка забронировать т.е. открыть окно
 const bookTourBtn = document.getElementById('btnToSend')
 
 bookTourBtn.addEventListener('click',(event) => bookTour(event))
@@ -165,6 +166,6 @@ function clearWindow() {
   document.getElementById('comment').value = '';
 }
 
-loadTours();
+
 
 
