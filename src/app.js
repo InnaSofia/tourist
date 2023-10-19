@@ -12,12 +12,12 @@ async function loadTours() {
 }
 
 async function init() {
-    const tours = await loadTours()
+    tours = await loadTours()
     renderTours(tours)
 }
 init()
 
-function renderTours(tours) {
+ function renderTours(tours) {
     let containerTours = document.getElementById("containerTours")
     containerTours.innerHTML = ""
     tours.forEach((tour) => {
@@ -91,19 +91,18 @@ ${
     
     
     
-    `
+    `       
+    })
 
-        tours.forEach((tour) => {
-            const btnBook = document.getElementById(`btnReservation-${tour.id}`)
-            btnBook.addEventListener("click", () => {
-                openWindow(tour.id)
-            })
+    tours.forEach((tour) => {
+        const btnBook = document.getElementById(`btnReservation-${tour.id}`)
+        btnBook.addEventListener("click", () => {
+            openWindow(tour.id)
         })
     })
 }
-
+ 
 const modalWindow = document.getElementById("modalWindow") //окно
-const сloseWindows = document.getElementById("BtnCloseWindows") //кнопка закрыть
 const btnReservation = document.getElementById(`btnReservation-${tours.id}`) //кнопка забронировать т.е. открыть окно
 const bookTourBtn = document.getElementById("btnToSend")
 
@@ -116,10 +115,24 @@ function openWindow(id) {
 
     modalWindow.style.display = "flex"
 
-    tours.find((u) => {
+    
+    const currentTour = tours.find((u) => {
         return u.id === id
     })
-    сloseWindows.addEventListener("click", сloseWindows)
+
+    document.getElementById("tour-info").innerHTML = `
+    <div>
+
+    ${currentTour.country},
+    ${currentTour.city},
+    ${currentTour.hotelName},
+    ${currentTour.startTime},
+    ${currentTour.endTime}
+    </div>
+    `
+
+    const сloseWindowsButton = document.getElementById("btnCloseWindows") //кнопка закрыть
+    сloseWindowsButton.addEventListener("click", сloseWindows)
 }
 
 function сloseWindows() {
@@ -135,7 +148,7 @@ async function bookTour(t) {
     const userComment = document.getElementById("comment").value
 
     let userData = {
-        name: userName,
+        customerName: userName,
         phone: userPhone,
         email: userEmail,
         comment: userComment
