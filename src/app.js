@@ -127,7 +127,7 @@ function openWindow(id) {
 
     document.getElementById("tour-info").innerHTML = `
     <div>
-    <div class="flex flex-col items-center"><img class ="rounded w-52" src="${
+    <div class="flex m-2 flex-col items-center"><img class ="rounded w-52" src="${
         currentTour.image
     }"/></div>
     <p class="text-slate-700">Страна тура</p>
@@ -188,8 +188,20 @@ async function bookTour(t) {
         let result = await response.json()
         return result
     } else {
-        alert("Повторите ещё раз! ПРОИЗОШЛА ОШИБКА")
+        document.getElementById('error').style.display = 'flex'
+       
     }
+    
+}
+
+//errorBtnClose кнопка закрыть ошибку
+//error окно ошибки
+//функция для закрытия ошибки при введения поля
+const errorClose = document.getElementById("errorBtnClose") //кнопка закрыть
+    errorClose.addEventListener("click", сloseError)
+
+function сloseError() {
+    error.style.display = "none"
 }
 
 //очищение полей

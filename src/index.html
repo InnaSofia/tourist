@@ -5,6 +5,7 @@
         <title>My First Parcel App</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles.css" />
+        
     </head>
     <body>
       
@@ -42,6 +43,7 @@
                         Введите Ваши данные для бронирования тура
                     </h2>
 
+                    
                     <div>
                         <p class="text-slate-700">Фамилия Имя</p>
                         <input
@@ -92,7 +94,28 @@
                 </div>
             </div>
         </div>
+        <div id="error" class=" items-center justify-center me-8 fixed top-0 px-1 mr-0 right-0 bottom-0 left-0 bg-indigo-400/40 hidden">
+            <div class="rounded-md flex flex-col justify-center bg-white p-12 gap-4">
+                <div><p class="text-red-800 font-semibold">
+                    Заполните все поля
+                </p></div>
+                <div><button id="errorBtnClose" class="border-solid border-2 border-rose-400 rounded-md text-sm shadow-sm caret-red-700 active:bg-red-100 focus:outline-none text-red-700 my-0 sm:mb-3 w-full pl-1">
+                    Закрыть
+                </button></div>
+            </div>
+           
 
+            <div id="registered" class=" items-center justify-center me-8 fixed top-0 px-1 mr-0 right-0 bottom-0 left-0 bg-indigo-400/40 hidden">
+                <div class="rounded-md flex flex-col justify-center bg-white p-12 gap-4">
+                    <div><p class="text-red-800 font-semibold">
+                        Ваше обращение зарегистрировано
+                    </p></div>
+                    <div><button id="registeredBtnClose" class="border-solid border-2 border-rose-400 rounded-md text-sm shadow-sm caret-red-700 active:bg-red-100 focus:outline-none text-red-700 my-0 sm:mb-3 w-full pl-1">
+                        Закрыть
+                    </button></div>
+                </div>
+
+        </div>
         <script type="module" src="app.js"></script>
     </body>
 </html>
