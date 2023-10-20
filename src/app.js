@@ -45,10 +45,12 @@ init()
 
        <span class="text-xs text-slate-500 pt-3">${tour.country}</span>
 ${
-    tour.city !== null
-        ? `  <span class="text-slate-500 pt-6 px-1">&middot;
+    tour.city !== null? `  
+    
+    <span class="text-slate-500 pt-6 px-1">&middot;
     </span>  
     <span class="text-xs text-slate-500 pt-3">${tour.city}</span>
+
     `
         : ""
 }
@@ -120,14 +122,32 @@ function openWindow(id) {
         return u.id === id
     })
 
+ 
+
+
     document.getElementById("tour-info").innerHTML = `
     <div>
+    <div class="flex flex-col items-center"><img class ="rounded w-52" src="${
+        currentTour.image
+    }"/></div>
+    <p class="text-slate-700">Страна тура</p>
+    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">${currentTour.country}</div>
+    <p class="text-slate-700">Город тура</p>
+    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">${currentTour.city}</div>
+    
+    <p class="text-slate-700">Название отеля</p>
+    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">
+    ${currentTour.hotelName}
+    </div>
+    <p class="text-slate-700">Бронируемые даты поездки</p>
+    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">
+    ${format(
+        new Date(currentTour.startTime),
+        `dd MMMM yyyy`,
+        { locale: ru }
+    )} - ${format(new Date(currentTour.endTime), `dd MMMM yyyy`, { locale: ru })}</div>
+    
 
-    ${currentTour.country},
-    ${currentTour.city},
-    ${currentTour.hotelName},
-    ${currentTour.startTime},
-    ${currentTour.endTime}
     </div>
     `
 
