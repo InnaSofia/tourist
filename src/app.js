@@ -19,8 +19,19 @@ function filterByCountry(tours, country){
     renderTours(filteredTours)
 }else{
     renderTours(tours)
-}
+}}
 
+
+//подд вопросом по рейтенгу
+function filterByRating(tours, rating){
+    if(rating){
+        const filteredTours = tours.filter((tour) => {
+            return tour.rating === rating
+    })
+    renderTours(filteredTours)
+}else{
+    renderTours(tours)
+}
     
 }
 
@@ -36,6 +47,10 @@ async function init() {
     document.getElementById('cyprus').addEventListener('click', () => filterByCountry(tours, 'Кипр'))
     document.getElementById('tanzania').addEventListener('click', () => filterByCountry(tours, 'Танзания'))
     document.getElementById('all').addEventListener('click', () => filterByCountry(tours))
+
+    document.getElementById('7').addEventListener('click', () => filterByRating(tours, '7'))
+    document.getElementById('8').addEventListener('click', () => filterByRating(tours, '8'))
+    document.getElementById('9').addEventListener('click', () => filterByRating(tours, '9'))
     
 }
 init()
