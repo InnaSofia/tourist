@@ -10,7 +10,7 @@ async function loadTours() {
     const data = await response.json()
     return data
 }
-// универсальный отдает отфильтрованные туры
+// универсальная функция, отдает отфильтрованные туры
 function filterByCountry(tours, country){
     if(country){
     const filteredTours = tours.filter((tour) => {
@@ -27,7 +27,7 @@ function filterByCountry(tours, country){
 async function init() {
     tours = await loadTours()
     renderTours(tours)
-    
+
     document.getElementById('thailand').addEventListener('click', () => filterByCountry(tours, 'Тайланд'))
     document.getElementById('maldives').addEventListener('click', () => filterByCountry(tours, 'Мальдивы'))
     document.getElementById('indonesia').addEventListener('click', () => filterByCountry(tours, 'Индонезия'))
