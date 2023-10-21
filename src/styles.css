@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .btn-primary {
-    @apply border border-solid border-yellow-600 px-4 py-2 rounded-md hover:bg-yellow-600 hover:text-white transition-all duration-300;
+    @apply border border-solid text-blue-900 border-blue-600 px-4 py-2 rounded-md hover:bg-blue-800 hover:text-white transition-all duration-300;
 }

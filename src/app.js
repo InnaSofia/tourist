@@ -10,10 +10,33 @@ async function loadTours() {
     const data = await response.json()
     return data
 }
+// универсальный отдает отфильтрованные туры
+function filterByCountry(tours, country){
+    if(country){
+    const filteredTours = tours.filter((tour) => {
+        return tour.country === country
+    })
+    renderTours(filteredTours)
+}else{
+    renderTours(tours)
+}
+
+    
+}
 
 async function init() {
     tours = await loadTours()
     renderTours(tours)
+    
+    document.getElementById('thailand').addEventListener('click', () => filterByCountry(tours, 'Тайланд'))
+    document.getElementById('maldives').addEventListener('click', () => filterByCountry(tours, 'Мальдивы'))
+    document.getElementById('indonesia').addEventListener('click', () => filterByCountry(tours, 'Индонезия'))
+    document.getElementById('egypt').addEventListener('click', () => filterByCountry(tours, 'Египет'))
+    document.getElementById('mexiko').addEventListener('click', () => filterByCountry(tours, 'Мексика'))
+    document.getElementById('cyprus').addEventListener('click', () => filterByCountry(tours, 'Кипр'))
+    document.getElementById('tanzania').addEventListener('click', () => filterByCountry(tours, 'Танзания'))
+    document.getElementById('all').addEventListener('click', () => filterByCountry(tours))
+    
 }
 init()
 
@@ -86,7 +109,7 @@ ${
     </div>
     </div>
     
-    </div>
+    </div> 
     
     </div>
 
@@ -152,11 +175,12 @@ function openWindow(id) {
     `
 
     const сloseWindowsButton = document.getElementById("btnCloseWindows") //кнопка закрыть
-    сloseWindowsButton.addEventListener("click", сloseWindows)
+    сloseWindowsButton.addEventListener("click", сloseWindows,)
 }
 
 function сloseWindows() {
     modalWindow.style.display = "none"
+    
 }
 
 async function bookTour(t) {
@@ -184,7 +208,6 @@ async function bookTour(t) {
     })
     if (response.ok) {
         alert("Ваше обращение зарегистрировано")
-        сloseWindows()
         let result = await response.json()
         return result
     } else {
