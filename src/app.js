@@ -1,6 +1,5 @@
 import { format, differenceInDays } from "date-fns"
 import { ru } from "date-fns/locale"
-import { document } from "postcss"
 
 let tours = []
 
@@ -12,60 +11,80 @@ async function loadTours() {
     return data
 }
 // универсальная функция, отдает отфильтрованные туры
-function filterByCountry(tours, country){
-    if(country){
-    const filteredTours = tours.filter((tour) => {
-        return tour.country === country
-    })
-    renderTours(filteredTours)
-}else{
-    renderTours(tours)
-}}
-
+function filterByCountry(tours, country) {
+    if (country) {
+        const filteredTours = tours.filter((tour) => {
+            return tour.country === country
+        })
+        renderTours(filteredTours)
+    } else {
+        renderTours(tours)
+    }
+}
 
 //под вопросом по рейтенгу
-function filterByRating(tours, rating){
-    if(rating){
+function filterByRating(tours, rating) {
+    if (rating) {
         const filteredTours = tours.filter((tour) => {
             return tour.rating === rating
-    })
-    renderTours(filteredTours)
-}else{
-    renderTours(tours)
-}
-    
+        })
+        renderTours(filteredTours)
+    } else {
+        renderTours(tours)
+    }
 }
 
-/* function loader(){
-    let loaderEl = document.getElementById('loader')
-    loaderEl.classList.add('hidden')
+function loader() {
+    let loaderEl = document.getElementById("loader")
+    loaderEl.classList.add("hidden")
     setTimeout(() => {
-        loaderEl.remove
+        loaderEl.remove()
     }, 1000)
-} */
+}
 
 async function init() {
     tours = await loadTours()
     renderTours(tours)
-    /* loader() */
+    loader()
 
-    document.getElementById('thailand').addEventListener('click', () => filterByCountry(tours, 'Тайланд'))
-    document.getElementById('maldives').addEventListener('click', () => filterByCountry(tours, 'Мальдивы'))
-    document.getElementById('indonesia').addEventListener('click', () => filterByCountry(tours, 'Индонезия'))
-    document.getElementById('egypt').addEventListener('click', () => filterByCountry(tours, 'Египет'))
-    document.getElementById('mexiko').addEventListener('click', () => filterByCountry(tours, 'Мексика'))
-    document.getElementById('cyprus').addEventListener('click', () => filterByCountry(tours, 'Кипр'))
-    document.getElementById('tanzania').addEventListener('click', () => filterByCountry(tours, 'Танзания'))
-    document.getElementById('all').addEventListener('click', () => filterByCountry(tours))
+    document
+        .getElementById("thailand")
+        .addEventListener("click", () => filterByCountry(tours, "Тайланд"))
+    document
+        .getElementById("maldives")
+        .addEventListener("click", () => filterByCountry(tours, "Мальдивы"))
+    document
+        .getElementById("indonesia")
+        .addEventListener("click", () => filterByCountry(tours, "Индонезия"))
+    document
+        .getElementById("egypt")
+        .addEventListener("click", () => filterByCountry(tours, "Египет"))
+    document
+        .getElementById("mexiko")
+        .addEventListener("click", () => filterByCountry(tours, "Мексика"))
+    document
+        .getElementById("cyprus")
+        .addEventListener("click", () => filterByCountry(tours, "Кипр"))
+    document
+        .getElementById("tanzania")
+        .addEventListener("click", () => filterByCountry(tours, "Танзания"))
+    document
+        .getElementById("all")
+        .addEventListener("click", () => filterByCountry(tours))
 
-    document.getElementById('7').addEventListener('click', () => filterByRating(tours, '7'))
-    document.getElementById('8').addEventListener('click', () => filterByRating(tours, '8'))
-    document.getElementById('9').addEventListener('click', () => filterByRating(tours, '9'))
-    
+    document
+        .getElementById("7")
+        .addEventListener("click", () => filterByRating(tours, "7"))
+    document
+        .getElementById("8")
+        .addEventListener("click", () => filterByRating(tours, "8"))
+    document
+        .getElementById("9")
+        .addEventListener("click", () => filterByRating(tours, "9"))
 }
 init()
 
- function renderTours(tours) {
+function renderTours(tours) {
     let containerTours = document.getElementById("containerTours")
     containerTours.innerHTML = ""
     tours.forEach((tour) => {
@@ -93,7 +112,8 @@ init()
 
        <span class="text-xs text-slate-500 pt-3">${tour.country}</span>
 ${
-    tour.city !== null? `  
+    tour.city !== null
+        ? `  
     
     <span class="text-slate-500 pt-6 px-1">&middot;
     </span>  
@@ -141,7 +161,7 @@ ${
     
     
     
-    `       
+    `
     })
 
     tours.forEach((tour) => {
@@ -151,12 +171,12 @@ ${
         })
     })
 }
- 
+
 const modalWindow = document.getElementById("modalWindow") //окно
-const btnReservation = document.getElementById(`btnReservation-${tours.id}`) //кнопка забронировать т.е. открыть окно
+//const btnReservation = document.getElementById(`btnReservation-${tours.id}`) //кнопка забронировать т.е. открыть окно
 const bookTourBtn = document.getElementById("btnToSend")
 
-bookTourBtn.addEventListener("click", (event) => bookTour(event))
+bookTourBtn.addEventListener("click", bookTour)
 //открываем
 let currentId
 
@@ -165,13 +185,9 @@ function openWindow(id) {
 
     modalWindow.style.display = "flex"
 
-    
     const currentTour = tours.find((u) => {
         return u.id === id
     })
-
- 
-
 
     document.getElementById("tour-info").innerHTML = `
     <div>
@@ -179,37 +195,40 @@ function openWindow(id) {
         currentTour.image
     }"/></div>
     <p class="text-slate-700">Страна тура</p>
-    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">${currentTour.country}</div>
+    <div class="text-sm shadow-sm select-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">${
+        currentTour.country
+    }</div>
     <p class="text-slate-700">Город тура</p>
-    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">${currentTour.city}</div>
+    <div class="text-sm shadow-sm text-indigo-700 my-0 sm:mb-3 w-full pl-1">${
+        currentTour.city
+    }</div>
     
     <p class="text-slate-700">Название отеля</p>
-    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">
+    <div class="text-sm shadow-sm text-indigo-700 my-0 sm:mb-3 w-full pl-1">
     ${currentTour.hotelName}
     </div>
     <p class="text-slate-700">Бронируемые даты поездки</p>
-    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">
-    ${format(
-        new Date(currentTour.startTime),
-        `dd MMMM yyyy`,
-        { locale: ru }
-    )} - ${format(new Date(currentTour.endTime), `dd MMMM yyyy`, { locale: ru })}</div>
+    <div class="text-sm shadow-sm select-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">
+    ${format(new Date(currentTour.startTime), `dd MMMM yyyy`, {
+        locale: ru
+    })} - ${format(new Date(currentTour.endTime), `dd MMMM yyyy`, {
+        locale: ru
+    })}</div>
     
 
     </div>
     `
 
     const сloseWindowsButton = document.getElementById("btnCloseWindows") //кнопка закрыть
-    сloseWindowsButton.addEventListener("click", сloseWindows,)
+    сloseWindowsButton.addEventListener("click", сloseWindows)
 }
 
 function сloseWindows() {
     modalWindow.style.display = "none"
-    
 }
 
-async function bookTour(t) {
-    const form = document.getElementById("form")
+async function bookTour() {
+    
 
     const userName = document.getElementById("name").value
     const userPhone = document.getElementById("phone").value
@@ -232,21 +251,23 @@ async function bookTour(t) {
         body: JSON.stringify(userData)
     })
     if (response.ok) {
-        alert("Ваше обращение зарегистрировано")
-        let result = await response.json()
-        return result
+       document.getElementById('registered').style.display = 'flex'
+       сloseWindows()
+       clearWindow() 
     } else {
-        document.getElementById('error').style.display = 'flex'
-       
+        document.getElementById("error").style.display = "flex"
     }
-    
 }
 
+//закрывается окно о том что все зарегестрированно
+document.getElementById('registeredBtnClose').addEventListener('click',() =>{
+    document.getElementById('registered').style.display = 'none'
+})
 //errorBtnClose кнопка закрыть ошибку
 //error окно ошибки
 //функция для закрытия ошибки при введения поля
 const errorClose = document.getElementById("errorBtnClose") //кнопка закрыть
-    errorClose.addEventListener("click", сloseError)
+errorClose.addEventListener("click", сloseError)
 
 function сloseError() {
     error.style.display = "none"
