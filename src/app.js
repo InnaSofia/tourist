@@ -1,5 +1,6 @@
 import { format, differenceInDays } from "date-fns"
 import { ru } from "date-fns/locale"
+import { document } from "postcss"
 
 let tours = []
 
@@ -22,7 +23,7 @@ function filterByCountry(tours, country){
 }}
 
 
-//подд вопросом по рейтенгу
+//под вопросом по рейтенгу
 function filterByRating(tours, rating){
     if(rating){
         const filteredTours = tours.filter((tour) => {
@@ -35,9 +36,18 @@ function filterByRating(tours, rating){
     
 }
 
+/* function loader(){
+    let loaderEl = document.getElementById('loader')
+    loaderEl.classList.add('hidden')
+    setTimeout(() => {
+        loaderEl.remove
+    }, 1000)
+} */
+
 async function init() {
     tours = await loadTours()
     renderTours(tours)
+    /* loader() */
 
     document.getElementById('thailand').addEventListener('click', () => filterByCountry(tours, 'Тайланд'))
     document.getElementById('maldives').addEventListener('click', () => filterByCountry(tours, 'Мальдивы'))
