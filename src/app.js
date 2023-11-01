@@ -26,7 +26,7 @@ function filterByCountry(tours, country) {
 function filterByRating(tours, rating) {
     if (rating) {
         const filteredTours = tours.filter((tour) => {
-            return tour.rating === rating
+            return tour.rating >= parseFload(rating)
         })
         renderTours(filteredTours)
     } else {
@@ -228,8 +228,6 @@ function сloseWindows() {
 }
 
 async function bookTour() {
-    
-
     const userName = document.getElementById("name").value
     const userPhone = document.getElementById("phone").value
     const userEmail = document.getElementById("email").value
@@ -251,17 +249,17 @@ async function bookTour() {
         body: JSON.stringify(userData)
     })
     if (response.ok) {
-       document.getElementById('registered').style.display = 'flex'
-       сloseWindows()
-       clearWindow() 
+        document.getElementById("registered").style.display = "flex"
+        сloseWindows()
+        clearWindow()
     } else {
         document.getElementById("error").style.display = "flex"
     }
 }
 
 //закрывается окно о том что все зарегестрированно
-document.getElementById('registeredBtnClose').addEventListener('click',() =>{
-    document.getElementById('registered').style.display = 'none'
+document.getElementById("registeredBtnClose").addEventListener("click", () => {
+    document.getElementById("registered").style.display = "none"
 })
 //errorBtnClose кнопка закрыть ошибку
 //error окно ошибки
