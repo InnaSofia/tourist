@@ -1,5 +1,6 @@
 import { format, differenceInDays } from "date-fns"
 import { ru } from "date-fns/locale"
+import Swal from 'sweetalert2'
 
 let tours = []
 
@@ -11,7 +12,7 @@ async function loadTours() {
     return data
 }
 // универсальная функция, отдает отфильтрованные туры
-function filterByCountry(tours, country) {
+function filterByCountry(country) {
     if (country) {
         const filteredTours = tours.filter((tour) => {
             return tour.country === country
@@ -22,17 +23,35 @@ function filterByCountry(tours, country) {
     }
 }
 
+const ratingCheckboxes = document.querySelectorAll('.checkbox-input')
+ratingCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', () =>{
+        const rating = parseFloat(checkbox.getAttribute('data-raiting'))
+        filterByRating(rating)
+    })
+})
+
 //под вопросом по рейтенгу
-function filterByRating(tours, rating) {
-    if (rating) {
-        const filteredTours = tours.filter((tour) => {
-            return tour.rating >= parseFload(rating)
-        })
+function filterByRating(minRating) {
+  
+ratingCheckboxes.forEach((checkbox) =>{
+    checkbox.checked = false
+})
+const selectedCheckbox = document.getElementById(`checkbox${minRating}`)
+if(selectedCheckbox){
+    selectedCheckbox.checked = true
+
+    if(minRating === 7.0){
+        const filteredTours = tours.filter((tour) => tour.rating < 8.0)
         renderTours(filteredTours)
-    } else {
-        renderTours(tours)
-    }
+}else if(minRating === 8.0){
+    const filteredTours = tours.filter((tour) => tour.rating >= 8.0 && tour.rating < 9.0)
+    renderTours(filteredTours)
 }
+}else if(minRating === 9.0){
+    const filteredTours = tours.filter((tour) => tour.rating >= 9.0)
+    renderTours(filteredTours)
+}}
 
 function loader() {
     let loaderEl = document.getElementById("loader")
@@ -47,7 +66,49 @@ async function init() {
     renderTours(tours)
     loader()
 
-    document
+const countries = [
+    {
+        id:'thailand',
+        name:'Тайланд'
+
+    },
+    {
+        id:'maldives',
+        name:'Мальдивы'
+    },
+    {
+        id:'indonesia',
+        name:'"Индонезия'
+    },
+    {
+        id:'egypt',
+        name:'Египет'
+    },
+    {
+        id:'mexiko',
+        name:'Мексика'
+    },
+    {
+        id:'cyprus',
+        name:'Кипр'
+    },
+    {
+        id:'tanzania',
+        name:'Танзания'
+    },
+    {
+        id:'all',
+        name:'null'
+    },
+]
+countries.forEach((country) => {
+    const item = document.getElementById(country.id)
+    if(item){
+        item.addEventListener('click', () => filterByCountry(country.name))
+    }
+})
+
+   /*  document
         .getElementById("thailand")
         .addEventListener("click", () => filterByCountry(tours, "Тайланд"))
     document
@@ -71,16 +132,27 @@ async function init() {
     document
         .getElementById("all")
         .addEventListener("click", () => filterByCountry(tours))
+ */
+/* 
+const countryButtons = Array.from(document.getElementsByClassName('country-filter'))
+        countryButtons.forEach(countryButton =>{
+            countryButton.addEventListener("click", () => filterByCountry(tours, countryButton.dateset.country))
+        })
 
-    document
-        .getElementById("7")
-        .addEventListener("click", () => filterByRating(tours, "7"))
-    document
-        .getElementById("8")
-        .addEventListener("click", () => filterByRating(tours, "8"))
-    document
-        .getElementById("9")
-        .addEventListener("click", () => filterByRating(tours, "9"))
+        const ratingCheckboxes = Array.from(document.getElementsByClassName('rating'))
+        ratingCheckboxes.forEach(ratingCheckboxe => {
+            ratingCheckbox.addEventListener("click", () => filterByRating(tours, ratingCheckbox.value))
+        })  */
+
+        const ratingCheckboxes = document.querySelectorAll('.checkbox-labels')
+        ratingCheckboxes.forEach((checkbox) =>{
+           checkbox.addEventListener('change', (event) =>{
+                if(event.target.checked){
+                    const rating = event.target.getAttribute(data-rating)
+                    filterByRating(rating)
+                }
+            })
+        })
 }
 init()
 
@@ -249,18 +321,32 @@ async function bookTour() {
         body: JSON.stringify(userData)
     })
     if (response.ok) {
-        document.getElementById("registered").style.display = "flex"
+     /*    document.getElementById("registered").style.display = "flex" */
+     Swal.fire({
+        title: "Ваша заявка зарегистрирована",
+        text: "Наш менеджер с вами скоро свяжется",
+        icon: "info"
+      });
+
+
         сloseWindows()
         clearWindow()
     } else {
-        document.getElementById("error").style.display = "flex"
+       /*  document.getElementById("error").style.display = "flex" */
+
+       Swal.fire({
+        icon: "error",
+        title: "Заполните пожалуйста все поля!",
+        text: "Ждём вашу заявку с нетерпением",
+       
+      });
     }
 }
 
-//закрывается окно о том что все зарегестрированно
+/* //закрывается окно о том что все зарегестрированно
 document.getElementById("registeredBtnClose").addEventListener("click", () => {
     document.getElementById("registered").style.display = "none"
-})
+}) */
 //errorBtnClose кнопка закрыть ошибку
 //error окно ошибки
 //функция для закрытия ошибки при введения поля

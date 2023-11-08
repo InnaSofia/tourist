@@ -25,31 +25,38 @@
                 
                 <div class="p-2">
                     <p class="text-indigo-800">Выбрать рейтинг отеля</p>
-                    <div class="flex justify-center m-4">
-                        <div><input id="7" class="border-2 border-indigo-600 w-5 h-5 cursor-pointer" type="checkbox" id=""></div>
-                    <div><p class="text-indigo-800 ml-1">7 звезд</p></div>
-                </div>
-                <div class="flex justify-center m-4">
-                    <div><input id="8" class="border-2 border-indigo-600 w-5 h-5 cursor-pointer" type="checkbox" id=""></div>
-                <div><p class="text-indigo-800 ml-1">8 звезд</p></div>
-            </div>
-            <div class="flex justify-center m-4">
-                <div><input id="9" class="border-2 border-indigo-600 w-5 h-5 cursor-pointer" type="checkbox" id=""></div>
-            <div><p class="text-indigo-800 ml-1">9 звезд</p></div>
-        </div>
-                </div>
 
-                <div class="p-1"> 
-                    <button id="thailand" class="btn-primary m-1">ТАЙЛАНД</button>
-                    <button id="maldives" class="btn-primary m-1">МАЛЬДИВЫ</button>
-                    <button id="indonesia" class="btn-primary m-1">ИНДОНЕЗИЯ</button>
-                    <button id="egypt" class="btn-primary m-1">ЕГИПЕТ</button>
-                    <button id="mexiko" class="btn-primary m-1">МЕКСИКА</button>
-                    <button id="cyprus" class="btn-primary m-1">КИПР</button>
-                    <button id="tanzania" class="btn-primary m-1">ТАНЗАНИЯ</button>
-                    <button id="all" class="btn-primary m-1">ВСЕ СТРАНЫ</button>
+                    <div class="flex justify-center m-4">
+                      
+                           <div> <input id="checkbox7" name="rating" data-raiting="7" class="checkbox-input rating border-2 border-indigo-600 w-5 h-5 cursor-pointer" type="checkbox"></div>
+                            <div><label for="checkbox7" class="checkbox-label text-indigo-800 ml-1">7 звезд</p></div>
                     </div>
+
+                    <div class="flex justify-center m-4">
+                      
+                        <div> <input id="checkbox8" name="rating" data-raiting="8" class="checkbox-input rating border-2 border-indigo-600 w-5 h-5 cursor-pointer" type="checkbox"></div>
+                         <div><label for="checkbox8" class="checkbox-label text-indigo-800 ml-1">8 звезд</p></div>
+                 </div>
+
+                 <div class="flex justify-center m-4">
+                      
+                    <div> <input id="checkbox9" name="rating" data-raiting="9" class="checkbox-input rating border-2 border-indigo-600 w-5 h-5 cursor-pointer" type="checkbox"></div>
+                     <div><label for="checkbox9" class="checkbox-label text-indigo-800 ml-1">9 звезд</p></div>
+             </div>
                     
+                </div>
+                    
+                <div class="p-1"> 
+                    <button class="btn-primary m-1" data-country="Тайланд">ТАЙЛАНД</button>
+                    <button class="btn-primary m-1" data-country="Мальдивы">МАЛЬДИВЫ</button>
+                    <button class="btn-primary m-1" data-country="Индонезия">ИНДОНЕЗИЯ</button>
+                    <button class="btn-primary m-1" data-country="Египет">ЕГИПЕТ</button>
+                    <button class="btn-primary m-1" data-country="Мексика">МЕКСИКА</button>
+                    <button class="btn-primary m-1" data-country="Кипр">КИПР</button>
+                    <button class="btn-primary m-1" data-country="Танзания">ТАНЗАНИЯ</button>
+                    <button class="btn-primary m-1" data-country="All">ВСЕ СТРАНЫ</button>
+                    </div>
+                </div> 
                 </div>
 
             </div>
@@ -131,28 +138,8 @@
                 </div>
             </div>
         </div>
-        <div id="error" class=" items-center justify-center me-8 fixed top-0 px-1 mr-0 right-0 bottom-0 left-0 bg-indigo-400/40 hidden">
-            <div class="rounded-md flex flex-col justify-center bg-white p-12 gap-4">
-                <div><p class="text-red-800 font-semibold">
-                    Заполните все поля
-                </p></div>
-                <div><button id="errorBtnClose" class="border-solid border-2 border-rose-400 rounded-md text-sm shadow-sm caret-red-700 active:bg-red-100 focus:outline-none text-red-700 my-0 sm:mb-3 w-full pl-1">
-                    Закрыть
-                </button></div>
-            </div>
-           
-
-           
-        </div>
-        <div id="registered" class=" items-center justify-center me-8 fixed top-0 px-1 mr-0 right-0 bottom-0 left-0 bg-indigo-400/40 hidden">
-            <div class="rounded-md flex flex-col justify-center bg-white p-12 gap-4">
-                <div><p class="text-red-800 font-semibold">
-                    Ваше обращение зарегистрировано
-                </p></div>
-                <div><button id="registeredBtnClose" class="border-solid border-2 border-rose-400 rounded-md text-sm shadow-sm caret-red-700 active:bg-red-100 focus:outline-none text-red-700 my-0 sm:mb-3 w-full pl-1">
-                    Закрыть
-                </button></div>
-            </div>
+       
+     
 
     </div>
         <script type="module" src="app.js"></script>
