@@ -40,19 +40,19 @@ ratingCheckboxes.forEach((checkbox) =>{
 const selectedCheckbox = document.getElementById(`checkbox${minRating}`)
 if(selectedCheckbox){
     selectedCheckbox.checked = true
-
+}
     if(minRating === 7.0){
         const filteredTours = tours.filter((tour) => tour.rating < 8.0)
         renderTours(filteredTours)
 }else if(minRating === 8.0){
     const filteredTours = tours.filter((tour) => tour.rating >= 8.0 && tour.rating < 9.0)
     renderTours(filteredTours)
-}
+
 }else if(minRating === 9.0){
     const filteredTours = tours.filter((tour) => tour.rating >= 9.0)
     renderTours(filteredTours)
-}}
-
+}
+}
 function loader() {
     let loaderEl = document.getElementById("loader")
     loaderEl.classList.add("hidden")
@@ -78,7 +78,7 @@ const countries = [
     },
     {
         id:'indonesia',
-        name:'"Индонезия'
+        name:'Индонезия'
     },
     {
         id:'egypt',
@@ -98,7 +98,7 @@ const countries = [
     },
     {
         id:'all',
-        name:'null'
+        name:null
     },
 ]
 countries.forEach((country) => {
@@ -108,47 +108,13 @@ countries.forEach((country) => {
     }
 })
 
-   /*  document
-        .getElementById("thailand")
-        .addEventListener("click", () => filterByCountry(tours, "Тайланд"))
-    document
-        .getElementById("maldives")
-        .addEventListener("click", () => filterByCountry(tours, "Мальдивы"))
-    document
-        .getElementById("indonesia")
-        .addEventListener("click", () => filterByCountry(tours, "Индонезия"))
-    document
-        .getElementById("egypt")
-        .addEventListener("click", () => filterByCountry(tours, "Египет"))
-    document
-        .getElementById("mexiko")
-        .addEventListener("click", () => filterByCountry(tours, "Мексика"))
-    document
-        .getElementById("cyprus")
-        .addEventListener("click", () => filterByCountry(tours, "Кипр"))
-    document
-        .getElementById("tanzania")
-        .addEventListener("click", () => filterByCountry(tours, "Танзания"))
-    document
-        .getElementById("all")
-        .addEventListener("click", () => filterByCountry(tours))
- */
-/* 
-const countryButtons = Array.from(document.getElementsByClassName('country-filter'))
-        countryButtons.forEach(countryButton =>{
-            countryButton.addEventListener("click", () => filterByCountry(tours, countryButton.dateset.country))
-        })
+   
 
-        const ratingCheckboxes = Array.from(document.getElementsByClassName('rating'))
-        ratingCheckboxes.forEach(ratingCheckboxe => {
-            ratingCheckbox.addEventListener("click", () => filterByRating(tours, ratingCheckbox.value))
-        })  */
-
-        const ratingCheckboxes = document.querySelectorAll('.checkbox-labels')
+        const ratingCheckboxes = document.querySelectorAll('.checkbox-input')
         ratingCheckboxes.forEach((checkbox) =>{
            checkbox.addEventListener('change', (event) =>{
                 if(event.target.checked){
-                    const rating = event.target.getAttribute(data-rating)
+                    const rating = event.target.getAttribute('data-raiting')
                     filterByRating(rating)
                 }
             })
@@ -245,7 +211,7 @@ ${
 }
 
 const modalWindow = document.getElementById("modalWindow") //окно
-//const btnReservation = document.getElementById(`btnReservation-${tours.id}`) //кнопка забронировать т.е. открыть окно
+
 const bookTourBtn = document.getElementById("btnToSend")
 
 bookTourBtn.addEventListener("click", bookTour)
@@ -321,7 +287,7 @@ async function bookTour() {
         body: JSON.stringify(userData)
     })
     if (response.ok) {
-     /*    document.getElementById("registered").style.display = "flex" */
+    
      Swal.fire({
         title: "Ваша заявка зарегистрирована",
         text: "Наш менеджер с вами скоро свяжется",
@@ -332,7 +298,7 @@ async function bookTour() {
         сloseWindows()
         clearWindow()
     } else {
-       /*  document.getElementById("error").style.display = "flex" */
+      
 
        Swal.fire({
         icon: "error",
@@ -343,19 +309,7 @@ async function bookTour() {
     }
 }
 
-/* //закрывается окно о том что все зарегестрированно
-document.getElementById("registeredBtnClose").addEventListener("click", () => {
-    document.getElementById("registered").style.display = "none"
-}) */
-//errorBtnClose кнопка закрыть ошибку
-//error окно ошибки
-//функция для закрытия ошибки при введения поля
-const errorClose = document.getElementById("errorBtnClose") //кнопка закрыть
-errorClose.addEventListener("click", сloseError)
 
-function сloseError() {
-    error.style.display = "none"
-}
 
 //очищение полей
 function clearWindow() {
