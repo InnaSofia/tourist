@@ -11,7 +11,7 @@ async function loadTours() {
     const data = await response.json()
     return data
 }
-// универсальная функция, отдает отфильтрованные туры
+
 function filterByCountry(country) {
     if (country) {
         const filteredTours = tours.filter((tour) => {
@@ -31,7 +31,7 @@ ratingCheckboxes.forEach((checkbox) => {
     })
 })
 
-//под вопросом по рейтенгу
+
 function filterByRating(minRating) {
   
 ratingCheckboxes.forEach((checkbox) =>{
@@ -215,7 +215,8 @@ const modalWindow = document.getElementById("modalWindow") //окно
 const bookTourBtn = document.getElementById("btnToSend")
 
 bookTourBtn.addEventListener("click", bookTour)
-//открываем
+
+
 let currentId
 
 function openWindow(id) {
@@ -311,7 +312,8 @@ async function bookTour() {
 
 
 
-//очищение полей
+
+
 function clearWindow() {
     document.getElementById("name").value = ""
     document.getElementById("phone").value = ""
