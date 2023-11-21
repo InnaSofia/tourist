@@ -1,5 +1,6 @@
 import { format, differenceInDays } from "date-fns"
 import { ru } from "date-fns/locale"
+import Swal from 'sweetalert2'
 
 let tours = []
 
@@ -10,14 +11,118 @@ async function loadTours() {
     const data = await response.json()
     return data
 }
+// универсальная функция, отдает отфильтрованные туры
+function filterByCountry(country) {
+    if (country) {
+        const filteredTours = tours.filter((tour) => {
+            return tour.country === country
+        })
+        renderTours(filteredTours)
+    } else {
+        renderTours(tours)
+    }
+}
+
+const ratingCheckboxes = document.querySelectorAll('.checkbox-input')
+ratingCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', () =>{
+        const rating = parseFloat(checkbox.getAttribute('data-raiting'))
+        filterByRating(rating)
+    })
+})
+
+//под вопросом по рейтенгу
+function filterByRating(minRating) {
+  
+ratingCheckboxes.forEach((checkbox) =>{
+    checkbox.checked = false
+})
+const selectedCheckbox = document.getElementById(`checkbox${minRating}`)
+if(selectedCheckbox){
+    selectedCheckbox.checked = true
+}
+    if(minRating === 7.0){
+        const filteredTours = tours.filter((tour) => tour.rating < 8.0)
+        renderTours(filteredTours)
+}else if(minRating === 8.0){
+    const filteredTours = tours.filter((tour) => tour.rating >= 8.0 && tour.rating < 9.0)
+    renderTours(filteredTours)
+
+}else if(minRating === 9.0){
+    const filteredTours = tours.filter((tour) => tour.rating >= 9.0)
+    renderTours(filteredTours)
+}
+}
+function loader() {
+    let loaderEl = document.getElementById("loader")
+    loaderEl.classList.add("hidden")
+    setTimeout(() => {
+        loaderEl.remove()
+    }, 1000)
+}
 
 async function init() {
     tours = await loadTours()
     renderTours(tours)
+    loader()
+
+const countries = [
+    {
+        id:'thailand',
+        name:'Тайланд'
+
+    },
+    {
+        id:'maldives',
+        name:'Мальдивы'
+    },
+    {
+        id:'indonesia',
+        name:'Индонезия'
+    },
+    {
+        id:'egypt',
+        name:'Египет'
+    },
+    {
+        id:'mexiko',
+        name:'Мексика'
+    },
+    {
+        id:'cyprus',
+        name:'Кипр'
+    },
+    {
+        id:'tanzania',
+        name:'Танзания'
+    },
+    {
+        id:'all',
+        name:null
+    },
+]
+countries.forEach((country) => {
+    const item = document.getElementById(country.id)
+    if(item){
+        item.addEventListener('click', () => filterByCountry(country.name))
+    }
+})
+
+   
+
+        const ratingCheckboxes = document.querySelectorAll('.checkbox-input')
+        ratingCheckboxes.forEach((checkbox) =>{
+           checkbox.addEventListener('change', (event) =>{
+                if(event.target.checked){
+                    const rating = event.target.getAttribute('data-raiting')
+                    filterByRating(rating)
+                }
+            })
+        })
 }
 init()
 
- function renderTours(tours) {
+function renderTours(tours) {
     let containerTours = document.getElementById("containerTours")
     containerTours.innerHTML = ""
     tours.forEach((tour) => {
@@ -45,7 +150,8 @@ init()
 
        <span class="text-xs text-slate-500 pt-3">${tour.country}</span>
 ${
-    tour.city !== null? `  
+    tour.city !== null
+        ? `  
     
     <span class="text-slate-500 pt-6 px-1">&middot;
     </span>  
@@ -86,14 +192,14 @@ ${
     </div>
     </div>
     
-    </div>
+    </div> 
     
     </div>
 
     
     
     
-    `       
+    `
     })
 
     tours.forEach((tour) => {
@@ -103,12 +209,12 @@ ${
         })
     })
 }
- 
+
 const modalWindow = document.getElementById("modalWindow") //окно
-const btnReservation = document.getElementById(`btnReservation-${tours.id}`) //кнопка забронировать т.е. открыть окно
+
 const bookTourBtn = document.getElementById("btnToSend")
 
-bookTourBtn.addEventListener("click", (event) => bookTour(event))
+bookTourBtn.addEventListener("click", bookTour)
 //открываем
 let currentId
 
@@ -117,13 +223,9 @@ function openWindow(id) {
 
     modalWindow.style.display = "flex"
 
-    
     const currentTour = tours.find((u) => {
         return u.id === id
     })
-
- 
-
 
     document.getElementById("tour-info").innerHTML = `
     <div>
@@ -131,21 +233,25 @@ function openWindow(id) {
         currentTour.image
     }"/></div>
     <p class="text-slate-700">Страна тура</p>
-    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">${currentTour.country}</div>
+    <div class="text-sm shadow-sm select-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">${
+        currentTour.country
+    }</div>
     <p class="text-slate-700">Город тура</p>
-    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">${currentTour.city}</div>
+    <div class="text-sm shadow-sm text-indigo-700 my-0 sm:mb-3 w-full pl-1">${
+        currentTour.city
+    }</div>
     
     <p class="text-slate-700">Название отеля</p>
-    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">
+    <div class="text-sm shadow-sm text-indigo-700 my-0 sm:mb-3 w-full pl-1">
     ${currentTour.hotelName}
     </div>
     <p class="text-slate-700">Бронируемые даты поездки</p>
-    <div class="border-solid border-2 border-indigo-600 rounded-md text-sm shadow-sm caret-blue-500 active:bg-violet-100 focus:outline-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">
-    ${format(
-        new Date(currentTour.startTime),
-        `dd MMMM yyyy`,
-        { locale: ru }
-    )} - ${format(new Date(currentTour.endTime), `dd MMMM yyyy`, { locale: ru })}</div>
+    <div class="text-sm shadow-sm select-none text-indigo-700 my-0 sm:mb-3 w-full pl-1">
+    ${format(new Date(currentTour.startTime), `dd MMMM yyyy`, {
+        locale: ru
+    })} - ${format(new Date(currentTour.endTime), `dd MMMM yyyy`, {
+        locale: ru
+    })}</div>
     
 
     </div>
@@ -159,9 +265,7 @@ function сloseWindows() {
     modalWindow.style.display = "none"
 }
 
-async function bookTour(t) {
-    const form = document.getElementById("form")
-
+async function bookTour() {
     const userName = document.getElementById("name").value
     const userPhone = document.getElementById("phone").value
     const userEmail = document.getElementById("email").value
@@ -183,26 +287,29 @@ async function bookTour(t) {
         body: JSON.stringify(userData)
     })
     if (response.ok) {
-        alert("Ваше обращение зарегистрировано")
-        сloseWindows()
-        let result = await response.json()
-        return result
-    } else {
-        document.getElementById('error').style.display = 'flex'
-       
-    }
     
+     Swal.fire({
+        title: "Ваша заявка зарегистрирована",
+        text: "Наш менеджер с вами скоро свяжется",
+        icon: "info"
+      });
+
+
+        сloseWindows()
+        clearWindow()
+    } else {
+      
+
+       Swal.fire({
+        icon: "error",
+        title: "Заполните пожалуйста все поля!",
+        text: "Ждём вашу заявку с нетерпением",
+       
+      });
+    }
 }
 
-//errorBtnClose кнопка закрыть ошибку
-//error окно ошибки
-//функция для закрытия ошибки при введения поля
-const errorClose = document.getElementById("errorBtnClose") //кнопка закрыть
-    errorClose.addEventListener("click", сloseError)
 
-function сloseError() {
-    error.style.display = "none"
-}
 
 //очищение полей
 function clearWindow() {
